@@ -1,0 +1,30 @@
+{%extends 'parent.html' %}
+
+
+{%block Title%}Update course{%endblock%}
+
+
+
+{% block content %}
+
+<form class="form container mt-4">
+      {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label" >Enter ID</label>
+        <input type="number" name="id" value="{{trainees.0}}" class="form-control" placeholder="Please Enter Your ID">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Enter Name</label>
+        <input type="text" name="name" value="{{trainee.1}}" class="form-control" placeholder="Please Enter Your Name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Enter hour duration</label>
+        <input type="text" class="form-control" name="email" value="{{trainee.2}}" placeholder="Please Enter Your text">
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">Submit</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{%extends 'parent.html' %}
+
+
+{%block content%}
+<table class="table table-bordered table-hover table-striped mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for trainee in trainees%}
+            <tr>
+                <td>{{trainee.0}}</td>
+                <td>{{trainee.1}}</td>
+                <td>{{trainee.2}}</td>
+                <td>
+                    <a href="{%url 'UpdateTrainee' trainee.0%}" class="btn btn-outline-warning">Update</a>
+                    <button class="btn btn-outline-danger">Delete</button>
+                </td>
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{%endblock%}
