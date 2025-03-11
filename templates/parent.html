@@ -17,14 +17,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a href="http://127.0.0.1:8088/#" class="nav-link" href="#">Trainee</a>
+        <a href="" class="nav-link" href="#">Trainee</a>
       </li>
       <li class="nav-item">
-        <a href="http://127.0.0.1:8097/course/" class="nav-link" href="#">Courses</a>
+        <a href="{% url 'ListOfCourse' %}" class="nav-link" href="#">Courses</a>
+      </li>
+      <li class="nav-item">
+        <a href=" {% url 'AddTrainee' %}" class="nav-link" href="#">Add trainee</a>
       </li>
     </ul>
 
-    <!-- Login & Register Buttons -->
+
     <div class="d-flex  ms-auto">
       <a href="{% url 'Login' %}" class="btn btn-light me-2">Login</a>
       <a href="{% url 'register' %}" class="btn btn-dark">Register</a>

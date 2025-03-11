@@ -7,6 +7,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Img</th>
             <th>Email</th>
             <th>Action</th>
         </tr>
@@ -14,12 +15,13 @@
     <tbody>
         {%for trainee in trainees%}
             <tr>
-                <td>{{trainee.0}}</td>
-                <td>{{trainee.1}}</td>
-                <td>{{trainee.2}}</td>
+                <td>{{trainee.trainee_id}}</td>
+                <td>{{trainee.name}}</td>
+                <td><img src="{{trainee.img.url}}" style="width:50px; height:50px" > </td>
+                <td>{{trainee.email}}</td>
                 <td>
-                    <a href="{%url 'UpdateTrainee' trainee.0%}" class="btn btn-outline-warning">Update</a>
-                    <button class="btn btn-outline-danger">Delete</button>
+                    <a href="{% url 'UpdateTrainee' trainee.trainee_id %}" class="btn btn-outline-warning">Update</a>
+                    <a href="{% url 'DeleteTrainee' trainee.trainee_id %}" class="btn btn-outline-danger">Delete</a>
                 </td>
             </tr>
         {%endfor%}

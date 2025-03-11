@@ -1,37 +1,53 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
+from .models import Trainee
 
-trainees = [
-    [1, 'eslam', 'engeslamayman@gmail.com'],
-    [2, 'ali', 'ali9878@gmail.com'],
-    [3, 'mohamed', 'mohamed43@gmail.com'],
-    [4, 'ibrahim', 'mohamed77@gmail.com']
-]
+
+
 # Create your views here.
 def ListOfTrainee(req):
+    context = {
+        'trainees': Trainee.objects.filter(isactive=True)
+    }
+    return render(req, 'trainee/list.html', context)
 
-    return render(req , 'trainee/list.html',context={'trainees':trainees})
+
 
 def AddTrainee(req):
-    return HttpResponse('<h1>Add Trainee</h1>')
+    if req.method == 'POST':
+        (Trainee.objects.create
+         (name=req.POST['trname'],
+          email=req.POST['tremail'],
+          img=req.FILES['trimg']))
+        return redirect('ListOfTrainee')
+    return render(req, 'trainee/addtrainee.html')
+
+
+
 
 
 def UpdateTrainee(req , id):
-    trainee = next((t for t in trainees if t[0] == id), None)
+    context = {'old':
+                   Trainee.objects.get(trainee_id=id)}
+    if (req.method == 'POST'):
+        Trainee.objects.filter(trainee_id=id).update(
+            name=req.POST['trname'],
+            email=req.POST['tremail'],
+            img=req.FILES['trimg']
+        )
+        return redirect('ListOfTrainee')
 
-    if not trainee:
-        return render(req, 'trainee/not_found.html')
-
-    return render(req, 'trainee/updatetrainee.html', {'trainee': trainee})
-
+    return render(req, 'trainee/updatetrainee.html', context)
 
 def DeleteTrainee(req , id):
-    return HttpResponse(f'<h1>delete Trainee {id}</h1>')
+    Trainee.objects.filter(trainee_id=id).update(isactive=False)
+    return redirect('ListOfTrainee')
+
+
 
 
 def login(req):
     return render(req , 'trainee/login.html' ,context={'login':login})
-
 
 
 def register(req):
